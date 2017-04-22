@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: c81fee1399e241847a64040975d44994
+timeCreated: 1492831067
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Ace Futurism
+  fontNames:
+  - Ace Futurism
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
