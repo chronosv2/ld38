@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UITimer : MonoBehaviour {
+public class UILoseTimer : MonoBehaviour {
 	Text myText;
 
 	// Use this for initialization
@@ -13,11 +13,15 @@ public class UITimer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		float timeLeft = GameManager.GameTimer;
+		float timeLeft = GameManager.LoseTimeRemaining * GameManager.LoseTimeStep;
 		int MinutesLeft = Mathf.FloorToInt(timeLeft / 60);
 		float SecondsLeft = timeLeft % 60; 
 		string secondsLeftString = SecondsLeft.ToString("00.00");
 
-		myText.text = MinutesLeft.ToString() + ":" + secondsLeftString;
+		if (timeLeft <= 0) {
+			myText.text = "";
+		} else {
+			myText.text = "-" + MinutesLeft.ToString() + ":" + secondsLeftString;
+		}
 	}
 }

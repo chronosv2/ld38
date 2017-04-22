@@ -7,11 +7,11 @@ using System;
 public class DebugStuff : MonoBehaviour {
 	public InputField loseTimeInput;
 
-	void ToggleIsPlaying() {
+	public void ToggleIsPlaying() {
 		GameManager.isPlaying = !GameManager.isPlaying;
 	}
 
-	void AddLoseTime() {
+	public void AddLoseTime() {
 		int Amt = Convert.ToInt32(loseTimeInput.text);
 		GameManager.addLoseTime(Amt);
 	}

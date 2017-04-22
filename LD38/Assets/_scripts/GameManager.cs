@@ -9,7 +9,8 @@ public class GameManager : MonoBehaviour {
 	public static float GameTimer;
 	public static int WorldState;
 	public static float LoseTimeStep;
-	static float LoseTimeRemaining;
+	public static float LoseTimeRemaining { get; private set; }
+	public static int HighScore { get; private set; }
 	public static bool isPlaying = false;
 	// Use this for initialization
 	void Awake () {
@@ -36,6 +37,25 @@ public class GameManager : MonoBehaviour {
 				doGameOver();
 			}
 		}
+	}
+
+	public static void NewGame() {
+		Score = 0;
+		PlayerHealth = 100;
+		GameTimer = 300;
+		LoseTimeStep = 3;
+		LoseTimeRemaining = 0;
+		WorldState = 0;
+	}
+
+	void SavePrefs() {
+
+	}
+
+	void LoadPrefs() {
+		if (PlayerPrefs.HasKey ("HighScore")) {
+			GameManager.HighScore = PlayerPrefs.GetInt ("HighScore");
+		}		
 	}
 
 	void doGameOver() {
