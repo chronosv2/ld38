@@ -1,0 +1,5 @@
+Phase 1:  W: 31   H: 22
+Phase 2:  W: 29   H: 20
+Phase 3:  W: 25   H: 16
+Phase 4:  W: 20   H: 13
+Phase 5:  W: 15   H: 10

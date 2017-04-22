@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 
-	public static int Score;
-	public static int PlayerHealth;
-	public static float GameTimer;
+	public static int Score {get; private set;}
+	public static int PlayerHealth {get; private set;}
+	public static float GameTimer {get; private set;}
 	public static int WorldState;
-	public static float LoseTimeStep;
+	public static float LoseTimeStep {get; private set;}
+	public int loseTimeStep = 3;
 	public static float LoseTimeRemaining { get; private set; }
 	public static int HighScore { get; private set; }
 	public static bool isPlaying = false;
@@ -17,12 +18,13 @@ public class GameManager : MonoBehaviour {
 		Score = 0;
 		PlayerHealth = 100;
 		GameTimer = 300;
-		LoseTimeStep = 3;
+		LoseTimeStep = loseTimeStep;
 		LoseTimeRemaining = 0;
 		WorldState = 0;
 	}
 	
 	// Update is called once per frame
+	// Manages the Timer (and accelerated timer with LoseTimer!)
 	void Update () {
 		if (isPlaying) {
 			if (LoseTimeRemaining > 0) {
@@ -33,10 +35,13 @@ public class GameManager : MonoBehaviour {
 			}
 
 			if (GameTimer <= 0) {
-				isPlaying = false;
 				doGameOver();
 			}
 		}
+	}
+
+	public static void giveScore(int amount) {
+		Score += amount;
 	}
 
 	public static void NewGame() {
@@ -52,13 +57,21 @@ public class GameManager : MonoBehaviour {
 
 	}
 
+	public static void damagePlayer(int amount) {
+		PlayerHealth -= amount;
+		if (PlayerHealth <= 0) {
+			doGameOver();
+		}
+	}
+
 	void LoadPrefs() {
 		if (PlayerPrefs.HasKey ("HighScore")) {
 			GameManager.HighScore = PlayerPrefs.GetInt ("HighScore");
 		}		
 	}
 
-	void doGameOver() {
+	static void doGameOver() {
+		isPlaying = false;
 		//TODO: Add Game Over stuff.
 	}
 

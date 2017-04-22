@@ -16,6 +16,8 @@ public class UITimer : MonoBehaviour {
 		float timeLeft = GameManager.GameTimer;
 		int MinutesLeft = Mathf.FloorToInt(timeLeft / 60);
 		float SecondsLeft = timeLeft % 60; 
+		if (MinutesLeft <= 0) MinutesLeft = 0;
+		if (SecondsLeft <= 0) SecondsLeft = 0;
 		string secondsLeftString = SecondsLeft.ToString("00.00");
 
 		myText.text = MinutesLeft.ToString() + ":" + secondsLeftString;

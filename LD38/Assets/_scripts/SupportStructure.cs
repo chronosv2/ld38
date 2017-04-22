@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Support_Structure : MonoBehaviour {
+public class SupportStructure : MonoBehaviour {
 
 	public int Health = 100;
 	public int loseTimeAmount = 4; // This value multiplied by LoseTimeStep for time lost when destroyed.
