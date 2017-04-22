@@ -1,0 +1,27 @@
+A Small World
+Twin-Stick Shooter:
+World Collapse Mechanic -- as something happens (what?) the world collapses and crumbles around you,
+  reducing your play area.
+
+  As for "what"?
+    As structures are destroyed?
+    As time progresses?
+
+5-Minute timer
+"Support Structures" that, as they are destroyed, lower the timer.
+World shrinks in size every minute
+At the end of 5 minutes, the final piece of the world gives and game ends.
+Dying imobilizes you for 3 seconds, giving enemies a chance to damage the world and deplete the world faster.
+
+11 World States:
+Full: 300-270
+Warn 1: 270-240
+Broken 1: 240-210
+Warn 2: 210-180
+Broken 2: 180-150
+Warn 3: 150-120
+Broken 3: 120-90
+Warn 4: 90-60
+Broken 4: 60-30
+Warn 5: 30-0
+END: 0
