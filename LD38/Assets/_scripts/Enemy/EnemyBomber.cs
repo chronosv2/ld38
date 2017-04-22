@@ -20,6 +20,7 @@ public class EnemyBomber : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (GameManager.isPaused || GameManager.isPreGame) return;
 		if (eTgt.nothingToTarget) doNoTargetsLeft();
 		if (eTgt.target == null) eTgt.Retarget();
 		if (!timerStarted && BombTimer <= 0) {

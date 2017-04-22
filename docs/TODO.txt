@@ -1,0 +1,6 @@
+TODO List:
+Complete Shooter Enemy
+Create Weapon Types
+Create Sprites and Effects
+Create Music
+Testing

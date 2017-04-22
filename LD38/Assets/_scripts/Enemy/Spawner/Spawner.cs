@@ -20,6 +20,7 @@ public class Spawner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (GameManager.isPaused || GameManager.isPreGame) return;
 		if (timer <= 0) {
 			doSpawnEnemy();
 			doResetTimer();

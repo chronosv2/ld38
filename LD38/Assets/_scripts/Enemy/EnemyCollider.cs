@@ -27,6 +27,7 @@ public class EnemyCollider : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//Attempt to collide with target.
+		if (GameManager.isPaused || GameManager.isPreGame) return;
 		transform.position += transform.up * Time.deltaTime * moveSpeed;
 	}
 
@@ -35,6 +36,7 @@ public class EnemyCollider : MonoBehaviour {
 		Debug.Log("Collided with " + collGO.name);
 		if (collGO.CompareTag("Target")) {
 			if (collGO.name == "Player_Unit") {
+				collGO.GetComponent<PlayerHealth>().doColliderHit();
 				GameManager.damagePlayer(damageValue);
 			} else {
 				SupportStructure sStruct = collGO.GetComponent<SupportStructure>();

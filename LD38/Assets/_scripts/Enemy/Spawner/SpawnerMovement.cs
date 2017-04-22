@@ -22,6 +22,7 @@ public class SpawnerMovement : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		if (GameManager.isPaused || GameManager.isPreGame) return;
 		Vector3 target = new Vector3(0,0,transform.position.z);
 		Vector3 dir = target - transform.position;
     	float angle = Mathf.Atan2(dir.y,dir.x) * Mathf.Rad2Deg-90;

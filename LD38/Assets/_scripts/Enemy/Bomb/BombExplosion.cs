@@ -41,9 +41,9 @@ public class BombExplosion : MonoBehaviour {
 		SupportStructure sS = other.collider.GetComponent<SupportStructure>();
 		if (other.collider.name == "Player_Unit") {
 			GameManager.damagePlayer(Damage);
+			other.collider.gameObject.GetComponent<PlayerHealth>().doColliderHit();
 		} else if (sS != null) {
 			sS.Health -= Damage;
-		}
+		} 
 	}
-
 }

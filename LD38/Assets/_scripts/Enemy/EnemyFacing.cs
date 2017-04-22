@@ -12,6 +12,7 @@ public class EnemyFacing : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (GameManager.isPaused || GameManager.isPreGame) return;
 		if (eTgt.target == null) return;
 		Vector3 target = eTgt.target.position;
 		Vector3 dir = target - transform.position;

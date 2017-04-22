@@ -14,8 +14,11 @@ public class PlayerMoveAndLook : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		HandleMovement();
-		HandleTurning();
+		if (GameManager.isPaused || GameManager.isPreGame) return;
+		if (GameManager.PlayerHealth > 0) {
+			HandleMovement();
+			HandleTurning();
+		}
 	}
 
 	void HandleMovement() {

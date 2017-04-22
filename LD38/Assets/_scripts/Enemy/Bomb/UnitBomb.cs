@@ -20,6 +20,7 @@ public class UnitBomb : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (GameManager.isPaused || GameManager.isPreGame) return;
 		if (Timer > 0) {
 			Timer -= Time.deltaTime;
 		} else {
