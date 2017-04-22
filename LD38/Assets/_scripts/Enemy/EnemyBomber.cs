@@ -12,6 +12,7 @@ public class EnemyBomber : MonoBehaviour {
 	bool timerStarted = false;
 	public float BombPlaceTime = 1.0f;
 	float BombTimer = 0;
+	public GameObject BombPrefab;
 	// Use this for initialization
 	void Start () {
 		eTgt = GetComponent<EnemyTargeting>();		
@@ -41,9 +42,10 @@ public class EnemyBomber : MonoBehaviour {
 
 	void doPlaceBomb() {
 		//Instanciate a bomb.
+		Instantiate(BombPrefab,transform.position,Quaternion.identity);
 		BombTimer = BombPlaceTime;
 		timerStarted = true;
-		Debug.Log("Placed a bomb.");
+		//Debug.Log("Placed a bomb.");
 	}
 
 	void doNoTargetsLeft() {

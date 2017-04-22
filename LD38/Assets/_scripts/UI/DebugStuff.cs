@@ -13,8 +13,13 @@ public class DebugStuff : MonoBehaviour {
 	}
 
 	public void AddLoseTime() {
-		int Amt = Convert.ToInt32(loseTimeInput.text);
-		GameManager.addLoseTime(Amt);
+		try {
+			int Amt = Convert.ToInt32(loseTimeInput.text);
+			GameManager.addLoseTime(Amt);
+		} catch {
+			Debug.LogWarning("You did not specify a valid integer for LoseTime to add.");
+			return;
+		}
 	}
 
 	public void onLoseTimeInputChange() {

@@ -10,38 +10,68 @@ public class TerrainHandler : MonoBehaviour {
 	public GameObject Phase3Ground;
 	public GameObject Phase4Ground;
 	public GameObject Phase5Ground;
+	public GameObject[] TowersPhase2;
+	bool DestroyedOuterTowers = false;
+	public GameObject[] TowersPhase5;
+	bool DestroyedInnerTowers = false;
 	SpriteRenderer WarnRenderer;
-	bool[] WorldStates;
+	BoxCollider2D WarnCollider;
 
 	// Use this for initialization
 	void Start () {
 		WarnRenderer = WarnZone.GetComponent<SpriteRenderer>();
-		WorldStates = new bool[4] {false, false, false, false};
+		WarnCollider = WarnZone.GetComponent<BoxCollider2D>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		switch (GameManager.WorldState) {
-			case 1:
-				if (!WorldStates[0]) {
-					//TODO: WorldState 1 stuff
+		if (!GameManager.isPlaying) return;
+		Vector2 PlayableBounds = new Vector2(31,22);
+		int TimeLeft = Mathf.FloorToInt(GameManager.GameTimer);
+		if (TimeLeft <= 0) {
+			WarnZone.SetActive(false);
+			if (!DestroyedInnerTowers) {
+				foreach (GameObject destroyGO in TowersPhase5) {
+					if (destroyGO != null) {
+						Destroy(destroyGO);
+					}
 				}
-			break;
-			case 2:
-				if (!WorldStates[1]) {
-					//TODO: WorldState 2 stuff
+				DestroyedInnerTowers = true;
+			}
+			if (!DestroyedOuterTowers) {
+				foreach (GameObject destroyGO in TowersPhase2) {
+					if (destroyGO != null) {
+						Destroy(destroyGO);
+					}
 				}
-			break;
-			case 3:
-				if (!WorldStates[2]) {
-					//TODO: WorldState 3 stuff
-				}
-			break;
-			case 4:
-				if (!WorldStates[3]) {
-					//TODO: WorldState 4 stuff
-				}
-			break;
+				DestroyedOuterTowers = true;
+			}
+		} else if (TimeLeft < 30) {
+			Phase5Ground.SetActive(false);			
+		} else if (TimeLeft < 60) {
+			PlayableBounds = new Vector2(15,10);
+			WarnRenderer.size = PlayableBounds;
+			WarnCollider.size = PlayableBounds;			
+		} else if (TimeLeft < 90) {
+			Phase4Ground.SetActive(false);			
+		} else if (TimeLeft < 120) {
+			PlayableBounds = new Vector2(20,13);
+			WarnRenderer.size = PlayableBounds;
+			WarnCollider.size = PlayableBounds;			
+		} else if (TimeLeft < 150) {
+			Phase3Ground.SetActive(false);			
+		} else if (TimeLeft < 180) {
+			PlayableBounds = new Vector2(25,16);
+			WarnRenderer.size = PlayableBounds;
+			WarnCollider.size = PlayableBounds;			
+		} else if (TimeLeft < 210) {
+			Phase2Ground.SetActive(false);			
+		} else if (TimeLeft < 240) {
+			PlayableBounds = new Vector2(29,20);
+			WarnRenderer.size = PlayableBounds;
+			WarnCollider.size = PlayableBounds;
+		} else if (TimeLeft < 270) {
+			Phase1Ground.SetActive(false);
 		}
 	}
 }

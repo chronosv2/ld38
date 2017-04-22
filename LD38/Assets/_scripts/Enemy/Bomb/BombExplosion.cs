@@ -6,7 +6,7 @@ public class BombExplosion : MonoBehaviour {
 
 	public float Range = 1f;
 	public int Damage = 100;
-	public float Lifetime = 1;
+	public float Lifetime = 0.7f;
 	float timer = 0;
 	// Use this for initialization
 	void Start () {
@@ -16,10 +16,19 @@ public class BombExplosion : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		timer += Time.deltaTime;
 		if (timer >= Lifetime) {
 			Destroy(gameObject);
+		} else {
+			timer += Time.deltaTime;
 		}
+	}
+
+	/// <summary>
+	/// Callback to draw gizmos that are pickable and always drawn.
+	/// </summary>
+	void OnDrawGizmos()
+	{
+		Gizmos.DrawWireSphere(transform.position, Range);
 	}
 
 	/// <summary>
@@ -30,7 +39,9 @@ public class BombExplosion : MonoBehaviour {
 	void OnCollisionStay2D(Collision2D other)
 	{
 		SupportStructure sS = other.collider.GetComponent<SupportStructure>();
-		if (sS != null) {
+		if (other.collider.name == "Player_Unit") {
+			GameManager.damagePlayer(Damage);
+		} else if (sS != null) {
 			sS.Health -= Damage;
 		}
 	}
