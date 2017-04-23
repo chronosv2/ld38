@@ -55,7 +55,9 @@ public class UnitBomb : MonoBehaviour {
 	/// <param name="other">The Collision2D data associated with this collision.</param>
 	void OnCollisionEnter2D(Collision2D other)
 	{
-		if (other.gameObject.tag == "Bullet") {
+		Debug.Log(other.gameObject.name);
+		Debug.Log(other.gameObject.tag);
+		if (other.collider.CompareTag("Bullet")) {
 			int Damage = other.gameObject.GetComponent<Projectile>().damageValue;
 			Health -= Damage;
 			Destroy(other.gameObject);

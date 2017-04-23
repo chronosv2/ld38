@@ -1,11 +1,12 @@
 fileFormatVersion: 2
 guid: a7380a05968578447bb2f4ba6407593a
-timeCreated: 1492825928
+timeCreated: 1492949581
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: Land_Warning
     21300002: Land_Fallen
+    21300004: Land_Bad_0
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -104,24 +105,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Land_Warning
+      name: Land_Bad_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 1
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Land_Fallen
-      rect:
-        serializedVersion: 2
-        x: 66
-        y: 1
+        x: 0
+        y: 0
         width: 64
         height: 64
       alignment: 0
