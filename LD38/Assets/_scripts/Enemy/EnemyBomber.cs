@@ -13,6 +13,7 @@ public class EnemyBomber : MonoBehaviour {
 	public float BombPlaceTime = 1.0f;
 	float BombTimer = 0;
 	public GameObject BombPrefab;
+	public float powerUpRate = 0.75f;
 	// Use this for initialization
 	void Start () {
 		eTgt = GetComponent<EnemyTargeting>();		
@@ -63,6 +64,7 @@ public class EnemyBomber : MonoBehaviour {
 
 	void doDestroyShot() {
 		GameManager.giveScore(scoreValue);
+		doPowerUpChance(powerUpRate);
 		doDestroy();
 	}
 
@@ -81,6 +83,20 @@ public class EnemyBomber : MonoBehaviour {
 			int Damage = other.gameObject.GetComponent<Projectile>().damageValue;
 			Health -= Damage;
 			Destroy(other.gameObject);
+		}
+	}
+
+		void doPowerUpChance(float rate) {
+		if (Random.value <= rate) {
+			GameManager myGM = GameObject.FindGameObjectWithTag("GM").GetComponent<GameManager>();
+			float pct = Random.value;
+			if (pct < 0.37f) {
+				Instantiate(myGM.PowerUps[0], transform.position, Quaternion.identity);
+			} else if (pct < 0.74) {
+				Instantiate(myGM.PowerUps[1], transform.position, Quaternion.identity);
+			} else {
+				Instantiate(myGM.PowerUps[2], transform.position, Quaternion.identity);
+			}
 		}
 	}
 }

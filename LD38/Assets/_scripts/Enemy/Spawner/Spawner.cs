@@ -7,6 +7,7 @@ public class Spawner : MonoBehaviour {
 	public float SpawnTimer = 3f;
 	float timer = 0;
 	float randomVariance = 0.3f;
+	public float delay = 0f;
 	public GameObject EnemyType;
 
 	// Use this for initialization
@@ -21,17 +22,21 @@ public class Spawner : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (GameManager.isPaused || GameManager.isPreGame || !GameManager.isPlaying) return;
+		int timeElapsed = Mathf.FloorToInt(300 - GameManager.GameTimer);
 		if (timer <= 0) {
-			doSpawnEnemy();
-			doResetTimer();
+			if (delay > 0 && timeElapsed > delay) {
+				doSpawnEnemy();
+			} else if (delay == 0) {
+				doSpawnEnemy();
+			}
+			doResetTimer(timeElapsed);
 		} else {
 			timer -= Time.deltaTime;
 		}
 
 	}
 
-	void doResetTimer() {
-		int timeElapsed = Mathf.FloorToInt(300 - GameManager.GameTimer);
+	void doResetTimer(int timeElapsed) {
 		timer = SpawnTimer * Random.Range(1-randomVariance, 1+randomVariance);
 		if (timeElapsed < 60) {
 			return;

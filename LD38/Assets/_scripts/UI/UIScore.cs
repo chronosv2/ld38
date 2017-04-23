@@ -14,6 +14,6 @@ public class UIScore : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		myText.text = GameManager.Score.ToString("0000000000");
+		myText.text = GameManager.Score.ToString("00");
 	}
 }

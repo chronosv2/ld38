@@ -9,6 +9,9 @@ public class EnemyCollider : MonoBehaviour {
 	public int Health = 8;
 	public int scoreValue = 250;
 	public int damageValue = 25;
+	float BasePowerUpRate = 0.2f;
+	float powerUpRate;
+	public AudioClip collidedClip;
 	EnemyTargeting eTgt;
 	//EnemyTargeting eTgt;
 	// Use this for initialization
@@ -17,12 +20,16 @@ public class EnemyCollider : MonoBehaviour {
 		eTgt = GetComponent<EnemyTargeting>();
 		if (TimeElapsed < 60) {
 			Health = BaseHealth;
+			powerUpRate = BasePowerUpRate * 1;
 		} else if (TimeElapsed < 120) {
 			Health = BaseHealth * 2;
+			powerUpRate = BasePowerUpRate * 2;
 		} else if (TimeElapsed < 180) {
 			Health = BaseHealth * 4;
+			powerUpRate = BasePowerUpRate * 3;
 		} else if (TimeElapsed < 240) {
 			Health = BaseHealth * 8;
+			powerUpRate = BasePowerUpRate * 4;
 		}
 	}
 	
@@ -63,12 +70,40 @@ public class EnemyCollider : MonoBehaviour {
 
 	void DoCollisionDestroy() {
 		//Collision Destruction effects (particles? Explosion sprite?)
+		PlayClipAt(collidedClip, transform.position);
 		Destroy(gameObject);
 	}
 
 	void DoShotDestroy() {
 		//Shot Destruction effects (particles? Explosion sprite?)
 		GameManager.giveScore(scoreValue);
+		doPowerUpChance(powerUpRate);
 		Destroy(gameObject);
+	}
+
+	void doPowerUpChance(float rate) {
+		if (Random.value <= rate) {
+			GameManager myGM = GameObject.FindGameObjectWithTag("GM").GetComponent<GameManager>();
+			float pct = Random.value;
+			if (pct < 0.37f) {
+				Instantiate(myGM.PowerUps[0], transform.position, Quaternion.identity);
+			} else if (pct < 0.74) {
+				Instantiate(myGM.PowerUps[1], transform.position, Quaternion.identity);
+			} else {
+				Instantiate(myGM.PowerUps[2], transform.position, Quaternion.identity);
+			}
+		}
+	}
+
+	AudioSource PlayClipAt(AudioClip clip, Vector3 pos){
+		GameObject tempGO = new GameObject("TempAudio"); // create the temp object
+		tempGO.transform.position = pos; // set its position
+		AudioSource aSource = tempGO.AddComponent<AudioSource>(); // add an audio source
+		aSource.clip = clip; // define the clip
+		aSource.rolloffMode = AudioRolloffMode.Linear;
+		// set other aSource properties here, if desired
+		aSource.Play(); // start the sound
+		Destroy(tempGO, clip.length); // destroy object after clip duration
+		return aSource; // return the AudioSource reference
 	}
 }

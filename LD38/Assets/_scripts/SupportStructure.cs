@@ -6,7 +6,8 @@ public class SupportStructure : MonoBehaviour {
 
 	public int Health = 100;
 	public int loseTimeAmount = 4; // This value multiplied by LoseTimeStep for time lost when destroyed.
-	
+	public AudioClip explodeSound;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -27,6 +28,7 @@ public class SupportStructure : MonoBehaviour {
 	void doDestroy() {
 		//TODO: Particle effect? Explosion sprite? Obviously play a sound!
 		Destroy(gameObject);
+		PlayClipAt(explodeSound, transform.position);
 	}
 	/// <summary>
 	/// Sent when an incoming collider makes contact with this object's
@@ -41,4 +43,16 @@ public class SupportStructure : MonoBehaviour {
 			Destroy(other.gameObject);
 		}
 	}	
+
+	AudioSource PlayClipAt(AudioClip clip, Vector3 pos){
+		GameObject tempGO = new GameObject("TempAudio"); // create the temp object
+		tempGO.transform.position = pos; // set its position
+		AudioSource aSource = tempGO.AddComponent<AudioSource>(); // add an audio source
+		aSource.clip = clip; // define the clip
+		aSource.rolloffMode = AudioRolloffMode.Linear;
+		// set other aSource properties here, if desired
+		aSource.Play(); // start the sound
+		Destroy(tempGO, clip.length); // destroy object after clip duration
+		return aSource; // return the AudioSource reference
+	}		
 }
