@@ -14,7 +14,7 @@ public class Projectile : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (GameManager.isPaused || GameManager.isPreGame) return;
+		if (GameManager.isPaused || GameManager.isPreGame || !GameManager.isPlaying) return;
 		transform.position += new Vector3(0,1,0)*moveSpeed*Time.deltaTime;
 	}
 }

@@ -16,6 +16,7 @@ public class BombExplosion : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		//This is the explision, not the bomb. If we pause this the animation will get mucked.
 		if (timer >= Lifetime) {
 			Destroy(gameObject);
 		} else {

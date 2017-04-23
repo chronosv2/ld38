@@ -12,7 +12,7 @@ public class PlayerHealth : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (GameManager.isPaused || GameManager.isPreGame) return;
+		if (GameManager.isPaused || GameManager.isPreGame || !GameManager.isPlaying) return;
 		if (GameManager.PlayerHealth <= 0) {
 			if (!playerIsDestroyed) {
 				gameObject.transform.position = new Vector2(0,0);

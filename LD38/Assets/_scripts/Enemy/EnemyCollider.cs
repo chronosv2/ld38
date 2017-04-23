@@ -9,10 +9,12 @@ public class EnemyCollider : MonoBehaviour {
 	public int Health = 8;
 	public int scoreValue = 250;
 	public int damageValue = 25;
+	EnemyTargeting eTgt;
 	//EnemyTargeting eTgt;
 	// Use this for initialization
 	void Start () {
 		int TimeElapsed = Mathf.FloorToInt(300 - GameManager.GameTimer);
+		eTgt = GetComponent<EnemyTargeting>();
 		if (TimeElapsed < 60) {
 			Health = BaseHealth;
 		} else if (TimeElapsed < 120) {
@@ -27,7 +29,13 @@ public class EnemyCollider : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//Attempt to collide with target.
-		if (GameManager.isPaused || GameManager.isPreGame) return;
+		if (GameManager.isPaused || GameManager.isPreGame || !GameManager.isPlaying) return;
+		if (eTgt.target.gameObject.name.Contains("Player")) {
+			if (eTgt.target.gameObject.GetComponent<PlayerHealth>().playerIsDestroyed) {
+				transform.position += -transform.up * Time.deltaTime * (moveSpeed/2);
+				return;
+			}
+		}
 		transform.position += transform.up * Time.deltaTime * moveSpeed;
 	}
 

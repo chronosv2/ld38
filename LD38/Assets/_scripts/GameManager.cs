@@ -16,8 +16,10 @@ public class GameManager : MonoBehaviour {
 	public static bool isPreGame = true;
 	static float PreGameTimer = 8;
 	static float timer;
+	static bool gameStarted = false;
 	public static bool isPaused = false;
 	public static string GameUpdateDisplay = "GET!READY";
+	static bool gameOver = false;
 	// Use this for initialization
 	void Awake () {
 		Score = 0;
@@ -33,6 +35,14 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	// Manages the Timer (and accelerated timer with LoseTimer!)
 	void Update () {
+		if (gameOver) return;
+		if (Input.GetMouseButtonDown(0)) {
+			Cursor.lockState = CursorLockMode.Confined;
+		}
+
+		if (Input.GetKeyDown(KeyCode.Escape)) {
+			Cursor.lockState = CursorLockMode.None;
+		}
 		if (isPreGame) {
 			if (timer > 0) {
 				if (timer < 1) {
@@ -48,6 +58,10 @@ public class GameManager : MonoBehaviour {
 				timer -= Time.deltaTime;
 			} else {
 				isPreGame = false;
+				if (gameStarted == false) {
+					gameStarted = true;
+					isPlaying = true;
+				}
 				GameUpdateDisplay = "";
 			}
 		} else {
@@ -56,9 +70,13 @@ public class GameManager : MonoBehaviour {
 			}
 			if (isPaused) {
 				GameUpdateDisplay = "PAUSED";
+				isPlaying = false;
 				return;
 			} else {
 				GameUpdateDisplay = "";
+				if (GameTimer > 0) {
+					isPlaying = true;
+				}
 			}
 		}
 		if (isPlaying) {
@@ -68,10 +86,9 @@ public class GameManager : MonoBehaviour {
 			} else {
 				GameTimer -= Time.deltaTime;
 			}
-
-			if (GameTimer <= 0) {
-				doGameOver();
-			}
+		}
+		if (GameTimer <= 0) {
+			doGameOver();
 		}
 	}
 
@@ -86,6 +103,9 @@ public class GameManager : MonoBehaviour {
 		LoseTimeStep = 3;
 		LoseTimeRemaining = 0;
 		WorldState = 0;
+		isPreGame = true;
+		isPlaying = false;
+		gameStarted = false;
 	}
 
 	void SavePrefs() {
@@ -111,6 +131,8 @@ public class GameManager : MonoBehaviour {
 
 	static void doGameOver() {
 		isPlaying = false;
+		GameUpdateDisplay = "Game!Over";
+		gameOver = true;
 		//TODO: Add Game Over stuff.
 	}
 

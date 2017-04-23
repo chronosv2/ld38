@@ -94,7 +94,7 @@ public class EnemyTargeting : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (GameManager.isPaused || GameManager.isPreGame) return;
+		if (GameManager.isPaused || GameManager.isPreGame || !GameManager.isPlaying) return;
 		if (RemoveOnRetarget) return;
 		if (LockTime <= 0 || target == null) {
 			GenerateTargetList();
