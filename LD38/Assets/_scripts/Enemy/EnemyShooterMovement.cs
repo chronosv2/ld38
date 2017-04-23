@@ -10,6 +10,9 @@ public class EnemyShooterMovement : MonoBehaviour {
 	float realSpeed;
 	float timer;
 	int Direction = 0;
+	public int BaseHealth = 8;
+	public int Health = 8;
+	public int scoreValue = 500;
 	GameObject playerGO;
 
 	// Use this for initialization
@@ -30,7 +33,10 @@ public class EnemyShooterMovement : MonoBehaviour {
 			timer -= Time.deltaTime;
 			doMovement();
 		}		
-	}
+			if (Health <= 0) {
+			doDestroyShot();
+		}
+}
 
 	void doMovement() {
 		Vector3 keepinRange = new Vector3();
@@ -44,10 +50,10 @@ public class EnemyShooterMovement : MonoBehaviour {
 		}
 		switch(Direction) {
 			case 1:
-				transform.position += (transform.right + keepinRange) * Time.deltaTime * moveSpeed;		
+				transform.position += (transform.right + keepinRange) * Time.deltaTime * realSpeed;		
 			break;
 			case 0:
-				transform.position += (-transform.right + keepinRange) * Time.deltaTime * moveSpeed;		
+				transform.position += (-transform.right + keepinRange) * Time.deltaTime * realSpeed;		
 			break;
 		}
 	}
@@ -70,5 +76,28 @@ public class EnemyShooterMovement : MonoBehaviour {
 			timer *= 0.625f;
 			realSpeed = moveSpeed * 1.75f;
 		}
+	}
+
+	/// <summary>
+	/// Sent when an incoming collider makes contact with this object's
+	/// collider (2D physics only).
+	/// </summary>
+	/// <param name="other">The Collision2D data associated with this collision.</param>
+	void OnCollisionEnter2D(Collision2D other)
+	{
+		if (other.gameObject.tag == "Bullet") {
+			int Damage = other.gameObject.GetComponent<Projectile>().damageValue;
+			Health -= Damage;
+			Destroy(other.gameObject);
+		}		
+	}
+
+	void doDestroyShot() {
+		GameManager.giveScore(scoreValue);
+		doDestroy();
+	}
+
+	void doDestroy() {
+		Destroy(gameObject);
 	}
 }

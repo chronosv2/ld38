@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class EnemyLookAtPlayer : MonoBehaviour {
 
-	public GameObject myTarget;
+	GameObject myTarget;
 
 	// Use this for initialization
 	void Start () {
-		
+		myTarget = GameObject.Find("Player_Unit");
 	}
 	
 	// Update is called once per frame

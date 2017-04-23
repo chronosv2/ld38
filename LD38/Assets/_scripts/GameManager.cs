@@ -20,6 +20,10 @@ public class GameManager : MonoBehaviour {
 	public static bool isPaused = false;
 	public static string GameUpdateDisplay = "GET!READY";
 	static bool gameOver = false;
+	public static int GunRate = 1;
+	public static int GunDamage = 1;
+	public static bool GunSpread = false;
+
 	// Use this for initialization
 	void Awake () {
 		Score = 0;

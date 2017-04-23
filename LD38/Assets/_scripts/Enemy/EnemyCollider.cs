@@ -37,6 +37,9 @@ public class EnemyCollider : MonoBehaviour {
 			}
 		}
 		transform.position += transform.up * Time.deltaTime * moveSpeed;
+		if (Health <= 0) {
+			DoShotDestroy();
+		}
 	}
 
 	void OnCollisionEnter2D (Collision2D collision) {
@@ -51,6 +54,10 @@ public class EnemyCollider : MonoBehaviour {
 				sStruct.Health -= damageValue;
 			}
 			DoCollisionDestroy();
+		} else if (collGO.CompareTag("Bullet")) {
+			int Damage = collGO.GetComponent<Projectile>().damageValue;
+			Health -= Damage;			
+			Destroy(collGO);
 		}
 	}
 

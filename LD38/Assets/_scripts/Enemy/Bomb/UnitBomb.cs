@@ -27,7 +27,7 @@ public class UnitBomb : MonoBehaviour {
 			doExplode();
 		}
 		if (Health <= 0) {
-			doDestroy();
+			doDestroyShot();
 		}
 	}
 
@@ -39,8 +39,26 @@ public class UnitBomb : MonoBehaviour {
 		Destroy(gameObject);
 	}
 
+	void doDestroyShot() {
+		GameManager.giveScore(scoreValue);
+		Destroy(gameObject);
+	}
+
 	void doDestroy() {
 		Destroy(gameObject);
-		GameManager.giveScore(scoreValue);
+	}
+
+	/// <summary>
+	/// Sent when an incoming collider makes contact with this object's
+	/// collider (2D physics only).
+	/// </summary>
+	/// <param name="other">The Collision2D data associated with this collision.</param>
+	void OnCollisionEnter2D(Collision2D other)
+	{
+		if (other.gameObject.tag == "Bullet") {
+			int Damage = other.gameObject.GetComponent<Projectile>().damageValue;
+			Health -= Damage;
+			Destroy(other.gameObject);
+		}				
 	}
 }

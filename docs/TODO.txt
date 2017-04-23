@@ -1,6 +1,7 @@
 TODO List:
-Complete Shooter Enemy
-Create Weapon Types
-Create Sprites and Effects
-Create Music
-Testing
+Get Shooter to Shoot (1h?)
+Get High Score Saving implemented (1h?)
+Create Sprites and Effects (3h?)
+Create Music and SFX (3h?)
+Subtotal: 8h of potential 15h
+Debug and Testing (Remaining Time)

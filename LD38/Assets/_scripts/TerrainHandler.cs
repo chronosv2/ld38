@@ -10,10 +10,6 @@ public class TerrainHandler : MonoBehaviour {
 	public GameObject Phase3Ground;
 	public GameObject Phase4Ground;
 	public GameObject Phase5Ground;
-	public GameObject[] TowersPhase2;
-	bool DestroyedOuterTowers = false;
-	public GameObject[] TowersPhase5;
-	bool DestroyedInnerTowers = false;
 	SpriteRenderer WarnRenderer;
 	BoxCollider2D WarnCollider;
 
@@ -30,22 +26,6 @@ public class TerrainHandler : MonoBehaviour {
 		int TimeLeft = Mathf.FloorToInt(GameManager.GameTimer);
 		if (TimeLeft <= 0) {
 			WarnZone.SetActive(false);
-			if (!DestroyedInnerTowers) {
-				foreach (GameObject destroyGO in TowersPhase5) {
-					if (destroyGO != null) {
-						Destroy(destroyGO);
-					}
-				}
-				DestroyedInnerTowers = true;
-			}
-			if (!DestroyedOuterTowers) {
-				foreach (GameObject destroyGO in TowersPhase2) {
-					if (destroyGO != null) {
-						Destroy(destroyGO);
-					}
-				}
-				DestroyedOuterTowers = true;
-			}
 		} else if (TimeLeft < 30) {
 			Phase5Ground.SetActive(false);			
 		} else if (TimeLeft < 60) {

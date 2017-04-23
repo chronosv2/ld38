@@ -5,16 +5,22 @@ using UnityEngine;
 public class Projectile : MonoBehaviour {
 
 	public int damageValue = 5;
-	public float moveSpeed = 3;
+	public float moveSpeed = 18;
+	float lifetime = 4f;
+	float timer;
 
 	// Use this for initialization
 	void Start () {
-		
+		timer = lifetime;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (GameManager.isPaused || GameManager.isPreGame || !GameManager.isPlaying) return;
-		transform.position += new Vector3(0,1,0)*moveSpeed*Time.deltaTime;
+		transform.position += transform.up*moveSpeed*Time.deltaTime;
+		timer -= Time.deltaTime;
+		if (timer <= 0) {
+			Destroy(gameObject);
+		}
 	}
 }

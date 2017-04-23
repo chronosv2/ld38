@@ -43,6 +43,9 @@ public class EnemyBomber : MonoBehaviour {
 				BombTimer = 0;
 			}
 		}
+		if (Health <= 0) {
+			doDestroyShot();
+		}
 	}
 
 	void doPlaceBomb() {
@@ -59,10 +62,25 @@ public class EnemyBomber : MonoBehaviour {
 	}
 
 	void doDestroyShot() {
-
+		GameManager.giveScore(scoreValue);
+		doDestroy();
 	}
 
 	void doDestroy() {
 		Destroy(gameObject);
+	}
+
+	/// <summary>
+	/// Sent when an incoming collider makes contact with this object's
+	/// collider (2D physics only).
+	/// </summary>
+	/// <param name="other">The Collision2D data associated with this collision.</param>
+	void OnCollisionEnter2D(Collision2D other)
+	{
+		if (other.gameObject.tag == "Bullet") {
+			int Damage = other.gameObject.GetComponent<Projectile>().damageValue;
+			Health -= Damage;
+			Destroy(other.gameObject);
+		}
 	}
 }
