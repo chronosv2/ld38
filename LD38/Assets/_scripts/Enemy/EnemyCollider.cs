@@ -70,7 +70,7 @@ public class EnemyCollider : MonoBehaviour {
 
 	void DoCollisionDestroy() {
 		//Collision Destruction effects (particles? Explosion sprite?)
-		PlayClipAt(collidedClip, transform.position);
+		PlayClipAt(collidedClip, transform.position, 0.7f);
 		Destroy(gameObject);
 	}
 
@@ -95,7 +95,7 @@ public class EnemyCollider : MonoBehaviour {
 		}
 	}
 
-	AudioSource PlayClipAt(AudioClip clip, Vector3 pos){
+	AudioSource PlayClipAt(AudioClip clip, Vector3 pos, float volume = 1f){
 		GameObject tempGO = new GameObject("TempAudio"); // create the temp object
 		tempGO.transform.position = pos; // set its position
 		AudioSource aSource = tempGO.AddComponent<AudioSource>(); // add an audio source
