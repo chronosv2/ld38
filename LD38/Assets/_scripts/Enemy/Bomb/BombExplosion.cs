@@ -13,7 +13,7 @@ public class BombExplosion : MonoBehaviour {
 	void Start () {
 		CircleCollider2D coll = GetComponent<CircleCollider2D>();
 		coll.radius = Range;
-		PlayClipAt(explodeClip, transform.position);
+		PlayClipAt(explodeClip, transform.position, 0.4f);
 	}
 	
 	// Update is called once per frame
@@ -50,7 +50,7 @@ public class BombExplosion : MonoBehaviour {
 		} 
 	}
 
-	AudioSource PlayClipAt(AudioClip clip, Vector3 pos){
+	AudioSource PlayClipAt(AudioClip clip, Vector3 pos, float volume = 1f){
 		GameObject tempGO = new GameObject("TempAudio"); // create the temp object
 		tempGO.transform.position = pos; // set its position
 		AudioSource aSource = tempGO.AddComponent<AudioSource>(); // add an audio source

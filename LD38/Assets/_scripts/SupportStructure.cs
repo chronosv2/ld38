@@ -28,7 +28,7 @@ public class SupportStructure : MonoBehaviour {
 	void doDestroy() {
 		//TODO: Particle effect? Explosion sprite? Obviously play a sound!
 		Destroy(gameObject);
-		PlayClipAt(explodeSound, transform.position);
+		PlayClipAt(explodeSound, transform.position, 0.5f);
 	}
 	/// <summary>
 	/// Sent when an incoming collider makes contact with this object's
@@ -44,7 +44,7 @@ public class SupportStructure : MonoBehaviour {
 		}
 	}	
 
-	AudioSource PlayClipAt(AudioClip clip, Vector3 pos){
+	AudioSource PlayClipAt(AudioClip clip, Vector3 pos, float volume = 1f){
 		GameObject tempGO = new GameObject("TempAudio"); // create the temp object
 		tempGO.transform.position = pos; // set its position
 		AudioSource aSource = tempGO.AddComponent<AudioSource>(); // add an audio source

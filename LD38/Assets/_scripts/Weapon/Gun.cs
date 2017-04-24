@@ -69,7 +69,7 @@ public class Gun : MonoBehaviour {
 		Vector3 dir = target - transform.position;
 		float angle = Mathf.Atan2(dir.y,dir.x) * Mathf.Rad2Deg-90;
 		makeBullet(Quaternion.AngleAxis(angle, Vector3.forward));
-		PlayClipAt(shootClip, transform.position);
+		PlayClipAt(shootClip, transform.position, 0.40f);
 		if ((GameManager.GunSpread && isPlayerGun) || isSpread) {
 			foreach (Transform child in transform) {
 				target = child.position;
@@ -88,13 +88,14 @@ public class Gun : MonoBehaviour {
 		}		
 	}
 
-	AudioSource PlayClipAt(AudioClip clip, Vector3 pos){
+	AudioSource PlayClipAt(AudioClip clip, Vector3 pos, float volume = 1f){
 		GameObject tempGO = new GameObject("TempAudio"); // create the temp object
 		tempGO.transform.position = pos; // set its position
 		AudioSource aSource = tempGO.AddComponent<AudioSource>(); // add an audio source
 		aSource.clip = clip; // define the clip
 		aSource.rolloffMode = AudioRolloffMode.Linear;
 		// set other aSource properties here, if desired
+		aSource.volume = volume;
 		aSource.Play(); // start the sound
 		Destroy(tempGO, clip.length); // destroy object after clip duration
 		return aSource; // return the AudioSource reference
