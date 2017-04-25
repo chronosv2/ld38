@@ -21,6 +21,6 @@ public class WeaponDisplay : MonoBehaviour {
 			spreadText = "<color=cyan>Spread</color>";
 		}
 
-		myText.text = "weapon!type: "+spreadText+"!D:"+fireDamage.ToString()+"!R:"+FireRate.ToString();
+		myText.text = spreadText+"!D:"+fireDamage.ToString()+"!R:"+FireRate.ToString();
 	}
 }
