@@ -35,16 +35,32 @@ public class PlayerMoveAndLook : MonoBehaviour {
 		Vector2 newPosition;
 		float NewY = transform.position.y;
 		float NewX = transform.position.x;
-		if (Input.GetAxis("Vertical") > 0) {
-			NewY = transform.position.y + (moveSpeed * Time.deltaTime);
-		} else if (Input.GetAxis("Vertical") < 0) {
-			NewY = transform.position.y - (moveSpeed * Time.deltaTime);		
+		Debug.Log("H:"+Input.GetAxis("Horizontal")+" V:"+Input.GetAxis("Vertical")+" / JH:"+Mathf.Round(Input.GetAxis("JoyHorizontal"))+" JV:"+Mathf.Round(Input.GetAxis("JoyVertical")));
+		float joyX = 0;
+		float joyY = 0;
+		if (Input.GetAxis("JoyHorizontal") < 0) {
+			joyX = -1;
+		} else if (Input.GetAxis("JoyHorizontal") > 0) {
+			joyX = 1;
 		}
-		if (Input.GetAxis("Horizontal") > 0) {
-			NewX = transform.position.x + (moveSpeed * Time.deltaTime);
-		} else if (Input.GetAxis("Horizontal") < 0) {
-			NewX = transform.position.x - (moveSpeed * Time.deltaTime);			
+		if (Input.GetAxis("JoyVertical") < 0) {
+			joyY = -1;
+		} else if (Input.GetAxis("JoyVertical") > 0) {
+			joyY = 1;
 		}
+		NewX = transform.position.x + ((Input.GetAxis("Horizontal") + joyX) * moveSpeed * Time.deltaTime);
+		NewY = transform.position.y + ((Input.GetAxis("Vertical") + joyY) * moveSpeed * Time.deltaTime);
+
+		// if (Input.GetAxis("Vertical") > 0.5) {
+		// 	NewY = transform.position.y + (moveSpeed * Time.deltaTime);
+		// } else if (Input.GetAxis("Vertical") < 0.5) {
+		// 	NewY = transform.position.y - (moveSpeed * Time.deltaTime);		
+		// }
+		// if (Input.GetAxis("Horizontal") > 0.5) {
+		// 	NewX = transform.position.x + (moveSpeed * Time.deltaTime);
+		// } else if (Input.GetAxis("Horizontal") < 0.5) {
+		// 	NewX = transform.position.x - (moveSpeed * Time.deltaTime);			
+		// }
 
 		// if (Input.GetKey(KeyCode.W)) {
 		// 	//Move Up (+Y)
