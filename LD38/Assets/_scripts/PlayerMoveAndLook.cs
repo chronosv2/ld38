@@ -35,20 +35,31 @@ public class PlayerMoveAndLook : MonoBehaviour {
 		Vector2 newPosition;
 		float NewY = transform.position.y;
 		float NewX = transform.position.x;
-		if (Input.GetKey(KeyCode.W)) {
-			//Move Up (+Y)
+		if (Input.GetAxis("Vertical") > 0) {
 			NewY = transform.position.y + (moveSpeed * Time.deltaTime);
-		} else if (Input.GetKey(KeyCode.S)) {
-			//Move Down (-Y)
-			NewY = transform.position.y - (moveSpeed * Time.deltaTime);
+		} else if (Input.GetAxis("Vertical") < 0) {
+			NewY = transform.position.y - (moveSpeed * Time.deltaTime);		
 		}
-		if (Input.GetKey(KeyCode.A)) {
-			//Move Left (-X)
-			NewX = transform.position.x - (moveSpeed * Time.deltaTime);
-		} else if (Input.GetKey(KeyCode.D)) {
-			//Move Right (+X)
+		if (Input.GetAxis("Horizontal") > 0) {
 			NewX = transform.position.x + (moveSpeed * Time.deltaTime);
+		} else if (Input.GetAxis("Horizontal") < 0) {
+			NewX = transform.position.x - (moveSpeed * Time.deltaTime);			
 		}
+
+		// if (Input.GetKey(KeyCode.W)) {
+		// 	//Move Up (+Y)
+		// 	NewY = transform.position.y + (moveSpeed * Time.deltaTime);
+		// } else if (Input.GetKey(KeyCode.S)) {
+		// 	//Move Down (-Y)
+		// 	NewY = transform.position.y - (moveSpeed * Time.deltaTime);
+		// }
+		// if (Input.GetKey(KeyCode.A)) {
+		// 	//Move Left (-X)
+		// 	NewX = transform.position.x - (moveSpeed * Time.deltaTime);
+		// } else if (Input.GetKey(KeyCode.D)) {
+		// 	//Move Right (+X)
+		// 	NewX = transform.position.x + (moveSpeed * Time.deltaTime);
+		// }
 		NewX = Mathf.Clamp(NewX, xmin, xmax);
 		NewY = Mathf.Clamp(NewY, ymin, ymax);
 		newPosition = new Vector2(NewX,NewY);
