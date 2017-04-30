@@ -23,7 +23,7 @@ public class TerrainHandler : MonoBehaviour {
 	void Update () {
 		if (!GameManager.isPlaying) return;
 		Vector2 PlayableBounds = new Vector2(31,22);
-		int TimeLeft = Mathf.FloorToInt(GameManager.GameTimer);
+		int TimeLeft = Mathf.CeilToInt(GameManager.GameTimer);
 		if (TimeLeft <= 0) {
 			WarnZone.SetActive(false);
 		} else if (TimeLeft < 30) {

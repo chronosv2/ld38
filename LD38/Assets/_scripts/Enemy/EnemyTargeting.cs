@@ -83,7 +83,7 @@ public class EnemyTargeting : MonoBehaviour {
             }
         }	
 		LockTime = TargetLockTime;
-		Debug.Log(gameObject.name + " chose target: " + bestTarget.gameObject.name);
+		//Debug.Log(gameObject.name + " chose target: " + bestTarget.gameObject.name);
         return bestTarget;
     }
 
