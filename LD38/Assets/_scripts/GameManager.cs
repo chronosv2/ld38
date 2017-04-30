@@ -37,12 +37,8 @@ public class GameManager : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
 		if (Master.isLoaded) foundMaster = true;
-		Score = 0;
-		PlayerHealth = 100;
-		GameTimer = 300;
 		LoseTimeStep = loseTimeStep;
-		LoseTimeRemaining = 0;
-		WorldState = 0;
+		NewGame();
 		//isPlaying = true;
 		timer = PreGameTimer;
 		playedTone = new bool[] {false, false, false, false};
@@ -142,12 +138,13 @@ public class GameManager : MonoBehaviour {
 		Score = 0;
 		PlayerHealth = 100;
 		GameTimer = 300;
-		LoseTimeStep = 3;
 		LoseTimeRemaining = 0;
 		WorldState = 0;
+		timer = 8;
 		isPreGame = true;
 		isPlaying = false;
 		gameStarted = false;
+		gameOver = false;
 	}
 
 	public static void damagePlayer(int amount) {
@@ -177,6 +174,7 @@ public class GameManager : MonoBehaviour {
 
 	public static void addLoseTime(int seconds) {
 		LoseTimeRemaining += seconds;
+		Debug.Log("Added "+(seconds*LoseTimeStep)+" sec of Lose Time");
 	}
 
 	public void toTitleScreen() {

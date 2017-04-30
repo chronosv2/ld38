@@ -51,7 +51,7 @@ public class EnemyCollider : MonoBehaviour {
 
 	void OnCollisionEnter2D (Collision2D collision) {
 		GameObject collGO = collision.collider.gameObject;
-		Debug.Log("Collided with " + collGO.name);
+		//Debug.Log("Collided with " + collGO.name);
 		if (collGO.CompareTag("Target")) {
 			if (collGO.name == "Player_Unit") {
 				collGO.GetComponent<PlayerHealth>().doColliderHit();

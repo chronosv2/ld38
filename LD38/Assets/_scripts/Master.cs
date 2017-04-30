@@ -33,7 +33,4 @@ public class Master : MonoBehaviour {
 		}
 	}
 
-	public void StartGame() {
-		SceneManager.LoadScene("main");
-	}
 }
